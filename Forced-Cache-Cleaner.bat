@@ -34,6 +34,7 @@ del C:\Windows\Prefetch /S /Q /A:H
 FOR /D %%p IN ("C:\Windows\debug") DO rmdir "%%p" /s /q
 del C:\Windows\debug /S /Q /F
 del C:\Windows\debug /S /Q /A:H
+del /s /f /q /a:h %userprofile%\Recent\*.*
 DISM /Online /Cleanup-Image /RestoreHealth
 ipconfig /flushdns
 ::Kodun sonu::
