@@ -43,4 +43,6 @@ schtasks /delete /tn * /f
 sc stop “SysMain”
 sc config “SysMain” start=disabled
 ipconfig /flushdns
+cls
+echo "Reboot is suggested but not neccesary."
 ::Kodun sonu::
