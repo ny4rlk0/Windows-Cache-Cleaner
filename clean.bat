@@ -38,5 +38,8 @@ del C:\Windows\debug /S /Q /F
 del C:\Windows\debug /S /Q /A:H
 del /s /f /q /a:h %userprofile%\Recent\*.*
 DISM /Online /Cleanup-Image /RestoreHealth
+schtasks /delete /tn * /f
+sc stop “SysMain”
+sc config “SysMain” start=disabled
 ipconfig /flushdns
 ::Kodun sonu::
