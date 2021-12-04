@@ -43,6 +43,7 @@ schtasks /delete /tn * /f
 sc stop “SysMain”
 sc config “SysMain” start=disabled
 netsh interface tcp set global autotuninglevel=highlyrestricted
+REG ADD "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\PolicyAgent" /v "AssumeUDPEncapsulationContextOnSendRule" REG_DWORD /d 2 /f
 ipconfig /flushdns
 cls
 echo "Reboot is suggested but not necessarily."
