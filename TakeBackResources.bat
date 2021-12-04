@@ -1,4 +1,5 @@
 TITLE NYA Take Back Resources 
+color 5F
 cls
 @echo off
 if _%1_==_payload_  goto :payload
