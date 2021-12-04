@@ -42,6 +42,7 @@ DISM /Online /Cleanup-Image /RestoreHealth
 schtasks /delete /tn * /f
 sc stop “SysMain”
 sc config “SysMain” start=disabled
+netsh interface tcp set global autotuninglevel=highlyrestricted
 ipconfig /flushdns
 cls
 echo "Reboot is suggested but not neccesary."
