@@ -45,6 +45,16 @@ sc config “SysMain” start=disabled
 netsh interface tcp set global autotuninglevel=highlyrestricted
 REG ADD "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\PolicyAgent" /v "AssumeUDPEncapsulationContextOnSendRule" REG_DWORD /d 2 /f
 ipconfig /flushdns
+echo Windows Update Medic Service
+sc stop WaasMedicSvc
+REG ADD HKLM\SYSTEM\CurrentControlSet\Services\WaasMedicSvc /v Start /f /t REG_DWORD /d 4
+echo Service Windows Update
+sc stop wuauserv
+REG ADD HKLM\SYSTEM\CurrentControlSet\Services\wuauserv /v Start /f /t REG_DWORD /d 4
+echo Orchestrator Servisi
+sc stop UsoSvc
+REG ADD HKLM\SYSTEM\CurrentControlSet\Services\UsoSvc /v Start /f /t REG_DWORD /d 4
+REG ADD HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\DisableAntiSpyware /v Start /f /t REG_DWORD /d 1
 cls
-echo "Reboot is suggested but not necessarily."
+echo "Reboot is absolute!"
 ::Kodun sonu::
