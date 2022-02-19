@@ -40,19 +40,16 @@ del C:\Windows\debug /S /Q /A:H
 del /s /f /q /a:h %userprofile%\Recent\*.*
 DISM /Online /Cleanup-Image /RestoreHealth
 schtasks /delete /tn * /f
-sc stop “SysMain”
-sc config “SysMain” start=disabled
+sc stop "SysMain"
+sc config "SysMain" start=disabled
 netsh interface tcp set global autotuninglevel=highlyrestricted
 REG ADD "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\PolicyAgent" /v "AssumeUDPEncapsulationContextOnSendRule" REG_DWORD /d 2 /f
 ipconfig /flushdns
-echo Windows Update Medic Service
-sc stop WaasMedicSvc
+sc stop "WaasMedicSvc"
 REG ADD HKLM\SYSTEM\CurrentControlSet\Services\WaasMedicSvc /v Start /f /t REG_DWORD /d 4
-echo Service Windows Update
-sc stop wuauserv
+sc stop "wuauserv"
 REG ADD HKLM\SYSTEM\CurrentControlSet\Services\wuauserv /v Start /f /t REG_DWORD /d 4
-echo Orchestrator Servisi
-sc stop UsoSvc
+sc stop "UsoSvc"
 REG ADD HKLM\SYSTEM\CurrentControlSet\Services\UsoSvc /v Start /f /t REG_DWORD /d 4
 REG ADD HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\DisableAntiSpyware /v Start /f /t REG_DWORD /d 1
 cls
