@@ -1,4 +1,4 @@
-TITLE GPEDIT.MSC RESET
+TITLE Partly Restore Hijacked System
 cls
 echo "This will not work if you did not removed virus and thing that autostarts it!"
 echo "Ny4rlk0 https://github.com/ny4rlk0/Windows-Cache-Cleaner/"
