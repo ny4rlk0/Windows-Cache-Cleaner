@@ -19,5 +19,5 @@ goto :eof
 :payload
 
 ::Kodu buraya yaz::
-powershell "gwmi win32_process | select CommandLine | select-string -pattern ".exe" > C:\users\%username%\Desktop\RunningProccess.txt"
+powershell "gwmi win32_process | select CommandLine | select-string -pattern ".exe" > %HOMEDRIVE%\users\%username%\Desktop\RunningProccess.txt"
 ::Kodu buraya yaz::
