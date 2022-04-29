@@ -1,0 +1,21 @@
+TITLE Reinstall All Windows Apps
+cls
+@echo off
+if _%1_==_payload_  goto :payload
+
+:getadmin
+    echo %~nx0: Asking for Admin permission from main frame.
+    set vbs=%temp%\getadmin.vbs
+    echo Set UAC = CreateObject^("Shell.Application"^)                >> "%vbs%"
+    echo UAC.ShellExecute "%~s0", "payload %~sdp0 %*", "", "runas", 1 >> "%vbs%"
+    "%temp%\getadmin.vbs"
+    del "%temp%\getadmin.vbs"
+goto :eof
+
+:payload
+
+::Kodu buraya yaz::
+powershell "Set-ExecutionPolicy Unrestricted"
+powershell "Get-AppXPackage -AllUsers | Foreach {Add-AppxPackage -DisableDevelopmentMode -Register """$($_.InstallLocation)\AppXManifest.xml"""}"
+powershell "Set-ExecutionPolicy restricted"
+::Kodu buraya yaz::
