@@ -113,8 +113,11 @@ powershell 'Set-MpPreference -QuarantinePurgeItemsAfterDelay 90'
 
 ::Reset Theme
 start /b "ThemeReset" "C:\Windows\Resources\Themes\aero.theme"
+
 ::Reapply Powershell Restrictions
 powershell 'Set-ExecutionPolicy restricted'
+
 ::Restart the Computer
 shutdown -r -t 0
+
 ::Kodu buraya yaz::
