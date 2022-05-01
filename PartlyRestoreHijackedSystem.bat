@@ -70,5 +70,6 @@ DISM /Online /Cleanup-Image /RestoreHealth
 powershell "Set-ExecutionPolicy Unrestricted"
 powershell "Get-AppXPackage -AllUsers | Foreach {Add-AppxPackage -DisableDevelopmentMode -Register """$($_.InstallLocation)\AppXManifest.xml"""}"
 powershell "Set-ExecutionPolicy restricted"
+start /b "ThemeReset" "C:\Windows\Resources\Themes\aero.theme"
 shutdown -r -t 0
 ::Kodu buraya yaz::
