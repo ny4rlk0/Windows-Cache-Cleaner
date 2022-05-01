@@ -118,7 +118,7 @@ powershell 'Set-MpPreference -SignatureFallbackOrder "MicrosoftUpdateServer|MMPC
 powershell 'Set-MpPreference -QuarantinePurgeItemsAfterDelay 90'
 
 ::Reset Theme
-start /b "ThemeReset" "C:\Windows\Resources\Themes\aero.theme"
+start /b "ThemeReset" "%HOMEDRIVE%\Windows\Resources\Themes\aero.theme"
 
 ::Reapply Powershell Restrictions
 powershell 'Set-ExecutionPolicy restricted'
