@@ -64,6 +64,7 @@ sc start "WinDefend"
 sc start "WdNisSvc"
 sc start "WdNisSvc"
 sc start "wscsvc"
+sfc /scannow
 DISM /Online /Cleanup-Image /CheckHealth
 DISM /Online /Cleanup-Image /RestoreHealth
 powershell "Set-ExecutionPolicy Unrestricted"
