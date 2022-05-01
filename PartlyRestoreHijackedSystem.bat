@@ -2,7 +2,7 @@ TITLE Partly Restore Hijacked System
 cls
 @echo off
 echo This will not work if you did not removed virus and thing that autostarts it!
-echo This computer needs to be connected to internet so this batch file repairs the Windows!
+echo This computer needs to be connected to internet in order to this batch file to repair the Windows!
 echo It will download required files from Microsoft's server!
 echo Ny4rlk0 https://github.com/ny4rlk0/Windows-Cache-Cleaner/
 echo "                                                       "
