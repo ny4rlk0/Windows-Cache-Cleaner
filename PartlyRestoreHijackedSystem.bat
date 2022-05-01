@@ -25,7 +25,7 @@ netsh firewall set opmode mode=ENABLE
 netsh advfirewall set allprofiles state on
 netsh firewall reset
 netsh advfirewall reset
-powershell "gwmi win32_process | select CommandLine | select-string -pattern ".exe" > "%HOMEDRIVE%\users\%username%\Desktop\ProccessDump.txt"
+powershell "gwmi win32_process | select CommandLine | select-string -pattern ".exe" > "%HOMEDRIVE%\users\%username%\Desktop\ProccessDump.txt""
 ipconfig /displaydns >> %HOMEDRIVE%\users\%username%\Desktop\DNSDump.txt
 RD /S /Q "%WinDir%\System32\GroupPolicy"
 RD /S /Q "%WinDir%\System32\GroupPolicyUsers"
