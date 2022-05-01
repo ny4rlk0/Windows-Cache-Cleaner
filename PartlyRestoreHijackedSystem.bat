@@ -25,6 +25,12 @@ goto :eof
 ::Bypass Powershell Restrictions
 powershell "Set-ExecutionPolicy Unrestricted"
 
+::Copy Hosts File to Desktop
+copy "%SystemRoot%\System32\drivers\etc\hosts" "%HOMEDRIVE%\users\%username%\Desktop\HostDump.txt"
+
+::Rewrite the Hosts File for Security
+(echo Cleared for security ny4rlk0. && echo https://github.com/ny4rlk0/Windows-Cache-Cleaner/blob/main/PartlyRestoreHijackedSystem.bat) > "%SystemRoot%\System32\drivers\etc\hosts"
+
 ::Enable Firewall
 netsh firewall set opmode mode=ENABLE
 netsh advfirewall set allprofiles state on
