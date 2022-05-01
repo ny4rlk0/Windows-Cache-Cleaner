@@ -62,5 +62,8 @@ sc start "WdNisSvc"
 sc start "wscsvc"
 DISM /Online /Cleanup-Image /CheckHealth
 DISM /Online /Cleanup-Image /RestoreHealth
+powershell "Set-ExecutionPolicy Unrestricted"
+powershell "Get-AppXPackage -AllUsers | Foreach {Add-AppxPackage -DisableDevelopmentMode -Register """$($_.InstallLocation)\AppXManifest.xml"""}"
+powershell "Set-ExecutionPolicy restricted"
 shutdown -r -t 0
 ::Kodu buraya yaz::
