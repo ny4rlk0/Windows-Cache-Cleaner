@@ -21,15 +21,30 @@ goto :eof
 :payload
 
 ::Kodu buraya yaz::
+
+::Bypass Powershell Restrictions
+powershell "Set-ExecutionPolicy Unrestricted"
+
+::Enable Firewall
 netsh firewall set opmode mode=ENABLE
 netsh advfirewall set allprofiles state on
+
+::Reset Firewall to Default Values
 netsh firewall reset
 netsh advfirewall reset
+
+::Dump Running Proccess to txt File
 powershell "gwmi win32_process | select CommandLine | select-string -pattern ".exe" > "%HOMEDRIVE%\users\%username%\Desktop\ProccessDump.txt""
+
+::Dump DNS Cache to txt File
 ipconfig /displaydns >> %HOMEDRIVE%\users\%username%\Desktop\DNSDump.txt
+
+::Reset Enforced Group Policy Rules to Default
 RD /S /Q "%WinDir%\System32\GroupPolicy"
 RD /S /Q "%WinDir%\System32\GroupPolicyUsers"
 gpupdate /force
+
+::Reset Services to Default
 sc config "SysMain" start=auto
 sc config "UsoSvc" start=auto
 sc config "wuauserv" start=auto
@@ -64,12 +79,42 @@ sc start "WinDefend"
 sc start "WdNisSvc"
 sc start "WdNisSvc"
 sc start "wscsvc"
+
+::Search For System Problems
 sfc /scannow
+
+::Download Working Versions of Broken and Infected Files from MicroSoft
 DISM /Online /Cleanup-Image /CheckHealth
 DISM /Online /Cleanup-Image /RestoreHealth
+
+::Reinstall alll Windows Apps
 powershell "Set-ExecutionPolicy Unrestricted"
 powershell "Get-AppXPackage -AllUsers | Foreach {Add-AppxPackage -DisableDevelopmentMode -Register """$($_.InstallLocation)\AppXManifest.xml"""}"
-powershell "Set-ExecutionPolicy restricted"
+
+::RESET DEFENDER SETTINGS
+powershell 'Set-ExecutionPolicy Unrestricted'
+powershell 'Set-MpPreference -DisableRealtimeMonitoring $false'
+powershell 'Set-MpPreference -DisableIOAVProtection $false'
+powershell "$pathExclusions = Get-MpPreference | select ExclusionPath; foreach ($exclusion in $pathExclusions) {if ($exclusion.ExclusionPath -ne $null) {Remove-MpPreference -ExclusionPath $exclusion.ExclusionPath}}"
+powershell "$extensionExclusion = Get-MpPreference | select ExclusionExtension; foreach ($exclusion in $extensionExclusion) {if ($exclusion.ExclusionExtension -ne $null) {Remove-MpPreference -ExclusionExtension $exclusion.ExclusionExtension}}"
+powershell "$processExclusions = Get-MpPreference | select ExclusionProcess; foreach ($exclusion in $processExclusions) {if ($exclusion.ExclusionProcess -ne $null) {Remove-MpPreference -ExclusionProcess $exclusion.ExclusionProcess}}"
+powershell 'Set-MpPreference -ScanScheduleTime "02:00:00"'
+powershell 'Set-MpPreference -ScanScheduleQuickScanTime "02:00:00"'
+powershell 'Set-MpPreference -DisableCatchupFullScan $true'
+powershell 'Set-MpPreference -DisableCatchupQuickScan $true'
+powershell 'Set-MpPreference -DisableArchiveScanning $false'
+powershell 'Set-MpPreference -DisableRemovableDriveScanning $true'
+powershell 'Set-MpPreference -DisableScanningNetworkFiles $true'
+powershell 'Set-MpPreference -SignatureUpdateInterval 6'
+powershell 'Set-MpPreference -SignatureUpdateCatchupInterval 1'
+powershell 'Set-MpPreference -SignatureDisableUpdateOnStartupWithoutEngine $false'
+powershell 'Set-MpPreference -SignatureFallbackOrder "MicrosoftUpdateServer|MMPC"'
+powershell 'Set-MpPreference -QuarantinePurgeItemsAfterDelay 90'
+
+::Reset Theme
 start /b "ThemeReset" "C:\Windows\Resources\Themes\aero.theme"
+::Reapply Powershell Restrictions
+powershell 'Set-ExecutionPolicy restricted'
+::Restart the Computer
 shutdown -r -t 0
 ::Kodu buraya yaz::
