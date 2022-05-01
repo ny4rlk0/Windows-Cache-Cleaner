@@ -50,7 +50,7 @@ RD /S /Q "%WinDir%\System32\GroupPolicy"
 RD /S /Q "%WinDir%\System32\GroupPolicyUsers"
 gpupdate /force
 
-::Reset Services to Default
+::Reset Important Services to Default
 sc config "SysMain" start=auto
 sc config "UsoSvc" start=auto
 sc config "wuauserv" start=auto
