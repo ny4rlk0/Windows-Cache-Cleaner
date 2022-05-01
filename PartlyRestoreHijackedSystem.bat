@@ -45,6 +45,9 @@ powershell "gwmi win32_process | select Caption,Path | Format-List *" > "%HOMEDR
 ::Dump DNS Cache to txt File
 ipconfig /displaydns >> %HOMEDRIVE%\users\%username%\Desktop\DNSDump.txt
 
+::Flush DNS Cache
+ipconfig /flushdns
+
 ::Reset Enforced Group Policy Rules to Default
 RD /S /Q "%WinDir%\System32\GroupPolicy"
 RD /S /Q "%WinDir%\System32\GroupPolicyUsers"
