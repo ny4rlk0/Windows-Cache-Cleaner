@@ -34,7 +34,7 @@ netsh firewall reset
 netsh advfirewall reset
 
 ::Dump Running Proccess to txt File
-powershell "gwmi win32_process | select CommandLine | select-string -pattern ".exe" > "%HOMEDRIVE%\users\%username%\Desktop\ProccessDump.txt""
+powershell "gwmi win32_process | select Caption,Path | Format-List * > "%HOMEDRIVE%\users\%username%\Desktop\ProccessDump.txt"
 
 ::Dump DNS Cache to txt File
 ipconfig /displaydns >> %HOMEDRIVE%\users\%username%\Desktop\DNSDump.txt
