@@ -127,15 +127,14 @@ start /b "ThemeReset" "%HOMEDRIVE%\Windows\Resources\Themes\aero.theme"
 powershell 'Set-ExecutionPolicy restricted'
 
 ::Scan The Computer
-cd /d "%PROGRAMDATA%\Microsoft\Windows Defender\Platform\4*"
-cd /d "%PROGRAMDATA%\Microsoft\Windows Defender\Platform\5*"
-cd /d "%PROGRAMDATA%\Microsoft\Windows Defender\Platform\6*"
-cd /d "%PROGRAMDATA%\Microsoft\Windows Defender\Platform\7*"
-cd /d "%PROGRAMDATA%\Microsoft\Windows Defender\Platform\8*"
-cd /d "%PROGRAMDATA%\Microsoft\Windows Defender\Platform\9*"
-cd /d "%PROGRAMDATA%\Microsoft\Windows Defender\Platform\10*"
-cd /d "%PROGRAMDATA%\Microsoft\Windows Defender\Platform\11*"
-MpCmdRun -Scan -ScanType 2
+echo "Updating the Windows Defender..."
+powershell "Update-MpSignature"
+echo "Initiating a scan of everything that connected to this computer."
+echo "If you gonna plug somedrive or USB Stick you got 2 min before it starts for scan. So do it now!"
+echo "Sleeping for 120 seconds..."
+Start-Sleep -Seconds 120
+echo "Initiating a Full Systemwide scan of everything that connected to this computer."
+powershell "Start-MpScan -ScanType FullScan"
 echo "Scan Finished. Now Rebooting..."
 
 ::Restart the Computer
