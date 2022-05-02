@@ -101,7 +101,6 @@ powershell "Set-ExecutionPolicy Unrestricted"
 powershell "Get-AppXPackage -AllUsers | Foreach {Add-AppxPackage -DisableDevelopmentMode -Register """$($_.InstallLocation)\AppXManifest.xml"""}"
 
 ::RESET DEFENDER SETTINGS
-powershell 'Set-ExecutionPolicy Unrestricted'
 powershell 'Set-MpPreference -DisableRealtimeMonitoring $false'
 powershell 'Set-MpPreference -DisableIOAVProtection $false'
 powershell "$pathExclusions = Get-MpPreference | select ExclusionPath; foreach ($exclusion in $pathExclusions) {if ($exclusion.ExclusionPath -ne $null) {Remove-MpPreference -ExclusionPath $exclusion.ExclusionPath}}"
