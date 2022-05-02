@@ -126,6 +126,18 @@ start /b "ThemeReset" "%HOMEDRIVE%\Windows\Resources\Themes\aero.theme"
 ::Reapply Powershell Restrictions
 powershell 'Set-ExecutionPolicy restricted'
 
+::Scan The Computer
+cd /d "%PROGRAMDATA%\Microsoft\Windows Defender\Platform\4*"
+cd /d "%PROGRAMDATA%\Microsoft\Windows Defender\Platform\5*"
+cd /d "%PROGRAMDATA%\Microsoft\Windows Defender\Platform\6*"
+cd /d "%PROGRAMDATA%\Microsoft\Windows Defender\Platform\7*"
+cd /d "%PROGRAMDATA%\Microsoft\Windows Defender\Platform\8*"
+cd /d "%PROGRAMDATA%\Microsoft\Windows Defender\Platform\9*"
+cd /d "%PROGRAMDATA%\Microsoft\Windows Defender\Platform\10*"
+cd /d "%PROGRAMDATA%\Microsoft\Windows Defender\Platform\11*"
+MpCmdRun -Scan -ScanType 2
+echo "Scan Finished. Now Rebooting..."
+
 ::Restart the Computer
 shutdown -r -t 0
 
