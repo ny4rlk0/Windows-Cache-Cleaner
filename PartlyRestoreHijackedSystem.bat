@@ -96,7 +96,6 @@ DISM /Online /Cleanup-Image /CheckHealth
 DISM /Online /Cleanup-Image /RestoreHealth
 
 ::Reinstall all Windows Apps
-powershell "Set-ExecutionPolicy Unrestricted"
 powershell "Get-AppXPackage -AllUsers | Foreach {Add-AppxPackage -DisableDevelopmentMode -Register """$($_.InstallLocation)\AppXManifest.xml"""}"
 
 ::RESET DEFENDER SETTINGS
