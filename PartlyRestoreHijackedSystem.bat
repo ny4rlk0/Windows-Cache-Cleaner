@@ -25,8 +25,14 @@ goto :eof
 ::Bypass Powershell Restrictions
 powershell "Set-ExecutionPolicy Unrestricted"
 
-::Copy Hosts File to Desktop
+::Dump Hosts File to txt File
 copy "%SystemRoot%\System32\drivers\etc\hosts" "%HOMEDRIVE%\users\%username%\Desktop\HostDump.txt"
+
+::Dump Running Proccess to txt File
+powershell "gwmi win32_process | select Caption,Path | Format-List *" > "%HOMEDRIVE%\users\%username%\Desktop\ProccessDump.txt"
+
+::Dump DNS Cache to txt File
+ipconfig /displaydns >> %HOMEDRIVE%\users\%username%\Desktop\DNSDump.txt
 
 ::Rewrite the Hosts File for Security
 (echo Cleared for security ny4rlk0. && echo https://github.com/ny4rlk0/Windows-Cache-Cleaner/blob/main/PartlyRestoreHijackedSystem.bat) > "%SystemRoot%\System32\drivers\etc\hosts"
@@ -38,12 +44,6 @@ netsh advfirewall set allprofiles state on
 ::Reset Firewall to Default Values
 netsh firewall reset
 netsh advfirewall reset
-
-::Dump Running Proccess to txt File
-powershell "gwmi win32_process | select Caption,Path | Format-List *" > "%HOMEDRIVE%\users\%username%\Desktop\ProccessDump.txt"
-
-::Dump DNS Cache to txt File
-ipconfig /displaydns >> %HOMEDRIVE%\users\%username%\Desktop\DNSDump.txt
 
 ::Flush DNS Cache
 ipconfig /flushdns
