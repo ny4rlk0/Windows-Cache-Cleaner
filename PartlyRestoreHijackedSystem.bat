@@ -132,7 +132,7 @@ powershell "Update-MpSignature"
 echo "Initiating a scan of everything that connected to this computer."
 echo "If you gonna plug somedrive or USB Stick you got 2 min before it starts for scan. So do it now!"
 echo "Sleeping for 120 seconds..."
-Start-Sleep -Seconds 120
+powershell "Start-Sleep -Seconds 120"
 echo "Initiating a Full Systemwide scan of everything that connected to this computer."
 powershell "Start-MpScan -ScanType FullScan"
 echo "Scan Finished. Now Rebooting..."
