@@ -34,6 +34,10 @@ powershell "gwmi win32_process | select Caption,Path | Format-List *" > "%HOMEDR
 ::Dump DNS Cache to txt File
 ipconfig /displaydns >> %HOMEDRIVE%\users\%username%\Desktop\DNSDump.txt
 
+::Dump Connected Machines to txt File
+powershell "netstat -n -b -q | Format-List *" > "%HOMEDRIVE%\users\%username%\Desktop\ConnectionDump1.txt"
+powershell "netstat -f -b -q | Format-List *" > "%HOMEDRIVE%\users\%username%\Desktop\ConnectionDump2.txt"
+
 ::Rewrite the Hosts File for Security
 (echo Cleared for security ny4rlk0. && echo https://github.com/ny4rlk0/Windows-Cache-Cleaner/blob/main/PartlyRestoreHijackedSystem.bat) > "%SystemRoot%\System32\drivers\etc\hosts"
 
