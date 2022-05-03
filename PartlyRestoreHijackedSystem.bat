@@ -49,6 +49,9 @@ netsh advfirewall set allprofiles state on
 netsh firewall reset
 netsh advfirewall reset
 
+::Reset Windows Store
+wsreset
+
 ::Flush DNS Cache
 ipconfig /flushdns
 
