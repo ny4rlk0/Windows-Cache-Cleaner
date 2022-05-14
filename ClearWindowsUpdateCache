@@ -1,0 +1,37 @@
+TITLE Partly Restore Hijacked System
+cls
+@echo off
+echo This will not work if you did not removed virus and thing that autostarts it!
+echo This computer needs to be connected to internet in order to this batch file to repair the Windows!
+echo It will download required files from Microsoft's server!
+echo Ny4rlk0 https://github.com/ny4rlk0/Windows-Cache-Cleaner/
+echo "                                                       "
+pause
+if _%1_==_payload_  goto :payload
+
+:getadmin
+    echo %~nx0: Asking for Admin permission from main frame. ~ny4rlk0
+    set vbs=%temp%\getadmin.vbs
+    echo Set UAC = CreateObject^("Shell.Application"^)                >> "%vbs%"
+    echo UAC.ShellExecute "%~s0", "payload %~sdp0 %*", "", "runas", 1 >> "%vbs%"
+    "%temp%\getadmin.vbs"
+    del "%temp%\getadmin.vbs"
+goto :eof
+
+:payload
+
+::Kodu buraya yaz::
+Title Clear Windows Update Cache Nyarlko
+@echo off
+net stop wuauserv
+net stop cryptSvc
+net stop bits
+net stop msiserver
+ren %Windir%\SoftwareDistribution SoftwareDistribution.old
+ren %Windir%\System32\catroot2 Catroot2.old
+del /f /s /q %Windir%\SoftwareDistribution.old
+del /f /s /q %Windir%\System32\Catroot2.old
+echo "                                    "
+echo Restart your computer Now!
+pause
+::Kod Sonu
